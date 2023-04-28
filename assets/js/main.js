@@ -54,7 +54,7 @@ buttoms.forEach((elements) => {
             botao__traducao.style.display = "inline";
         }
         if(evento.target.value === 'minerar'){  
-            window.open(`https://www.linguee.com.br/portugues-ingles/search?source=auto&query=${palavraGerada}`, '_blank');
+            window.open(`https://www.linguee.com.br/portugues-ingles/search?source=auto&query=${lista[palavra][0]}`, '_blank');
         }
         if(evento.target.value === 'atualizar'){ 
             window.location.reload();
