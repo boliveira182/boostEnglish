@@ -45,6 +45,7 @@ body {
     align-items: center;
     border: 2px solid black;
     padding: 0.3em;
+    font-size: 0.7em;
 }
 
 .conhecida {
@@ -75,6 +76,35 @@ body {
     box-shadow: inset 2px 2px 3px rgba(255, 255, 255, 0.6), inset -2px -2px 3px rgba(0, 0, 0, 0.6);
 }
 
+.original {
+    display: none;
+    border: 0;
+    line-height: 2.5;
+    padding: 0 20px;
+    font-size: 1rem;
+    text-align: center;
+    color: #fff;
+    text-shadow: 1px 1px 1px #000;
+    border-radius: 10px;
+    background-color: rgb(72, 9, 23);
+    background-image: linear-gradient(to top left, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2) 30%, rgba(0, 0, 0, 0));
+    box-shadow: inset 2px 2px 3px rgba(255, 255, 255, 0.6), inset -2px -2px 3px rgba(0, 0, 0, 0.6);
+}
+
+.minerar {
+    border: 0;
+    line-height: 2.5;
+    padding: 0 20px;
+    font-size: 1rem;
+    text-align: center;
+    color: #fff;
+    text-shadow: 1px 1px 1px #000;
+    border-radius: 10px;
+    background-color: rgb(72, 9, 23);
+    background-image: linear-gradient(to top left, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2) 30%, rgba(0, 0, 0, 0));
+    box-shadow: inset 2px 2px 3px rgba(255, 255, 255, 0.6), inset -2px -2px 3px rgba(0, 0, 0, 0.6);
+}
+
 .atualizar {
     border: 0;
     line-height: 2.5;
@@ -93,9 +123,18 @@ body {
     background-color: rgba(255, 0, 0, 1);
 }
 
+.minerar:hover {
+    background-color: rgba(255, 0, 0, 1);
+}
+
 .conhecida:hover {
     background-color: rgb(31, 154, 41);
 }
+
+.original:hover {
+    background-color: rgb(31, 154, 41);
+}
+
 
 .atualizar:hover {
     background-color: rgb(166, 164, 209);
