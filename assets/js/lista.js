@@ -1,5 +1,5 @@
 function preencheLista(){
-    var dicionario = [
+    var original = [
         "a",
         "abandon",
         "ability",
@@ -3001,10 +3001,7 @@ function preencheLista(){
         "youth",
         "zone"
     ]
-    return dicionario;
-}
 
-function preencheLista(){
     var traducao = [
         "a",
         "abandono",
@@ -6007,4 +6004,11 @@ function preencheLista(){
         "juventude",
         "zona"
     ]
+
+    var dicionario = [];
+    for (let index = 0; index < original.length; index++) {
+        dicionario.push([original[index], traducao[index]]);
+    }
+    console.log(dicionario);
+    return dicionario;
 }
