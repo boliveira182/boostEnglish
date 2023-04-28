@@ -1,12 +1,11 @@
-//const lista = prompt("Digite as palavras");
-//const newText = lista.replace(/(\r\n|\n|\r)/gm, " ");
-//const dicionario = newText.split(" ");
-//console.log(dicionario);
+//const lista_trad = prompt("Digite as palavras");
+//const newText = lista_trad.replace(/(\r\n|\n|\r)/gm, ".");
+//const traducao = newText.split(".");
+//console.log(traducao);
 
 var lista = JSON.parse(localStorage.getItem('dicionario')) || [];
 const lista__conhecidas = JSON.parse(localStorage.getItem('conhecidas')) || [];
 const buttoms = document.querySelectorAll('[buttom]');
-
 
 if(lista.length === 0){
     lista = preencheLista();
@@ -16,7 +15,7 @@ if(lista.length === 0){
 const palavra = Math.floor(Math.random() * lista.length);
 
 const mostraPalavra = document.querySelector('[palavra]');
-mostraPalavra.innerHTML = lista[palavra];
+mostraPalavra.innerHTML = lista[palavra][0];
 
 const palavraGerada = lista[palavra];
 
