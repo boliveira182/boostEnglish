@@ -6,6 +6,8 @@
 var lista = JSON.parse(localStorage.getItem('dicionario')) || [];
 const lista__conhecidas = JSON.parse(localStorage.getItem('conhecidas')) || [];
 const buttoms = document.querySelectorAll('[buttom]');
+const botao__original = document.querySelector('.original');
+const botao__traducao = document.querySelector('.desconhecida');
 
 if(lista.length === 0){
     lista = preencheLista();
@@ -42,8 +44,19 @@ buttoms.forEach((elements) => {
 
         }
         if(evento.target.value === 'desconheco'){
+            mostraPalavra.innerHTML = lista[palavra][1];
+            botao__original.style.display = "inline";
+            botao__traducao.style.display = "none";
+        }
+        if(evento.target.value === 'original'){
+            mostraPalavra.innerHTML = lista[palavra][0];
+            botao__original.style.display = "none";
+            botao__traducao.style.display = "inline";
+        }
+        if(evento.target.value === 'minerar'){  
             window.open(`https://www.linguee.com.br/portugues-ingles/search?source=auto&query=${palavraGerada}`, '_blank');
-        }else{
+        }
+        if(evento.target.value === 'atualizar'){ 
             window.location.reload();
         }
         
