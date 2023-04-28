@@ -31,6 +31,21 @@ body {
     font-family: var(--font-family);
 }
 
+.titulo{
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+}
+
+.box{
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid black;
+    padding: 0.3em;
+}
 
 .conhecida {
     border: 0;
@@ -90,10 +105,7 @@ body {
     box-shadow: inset -2px -2px 3px rgba(255, 255, 255, 0.6), inset 2px 2px 3px rgba(0, 0, 0, 0.6);
 }
 
-.box{
-    border: 2px solid black;
-    padding: 0.5em;
-}
+
 
 .info{
     display: flex;
