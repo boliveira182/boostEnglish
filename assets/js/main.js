@@ -66,7 +66,7 @@ buttoms.forEach((elements) => {
             
             localStorage.setItem('dicionario', JSON.stringify(lista));
 
-            atualizaTela();
+            window.location.reload();
         } 
 
         if(evento.target.attributes.value.value=== 'original'){
