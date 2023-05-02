@@ -19,6 +19,10 @@ if(lista.length === 0){
 const palavra = Math.floor(Math.random() * lista.length);
 
 const mostraPalavra = document.querySelector('[palavra]');
+
+if(lista[palavra][0].length > 11){
+    card.style.fontSize='0.6em';
+}
 mostraPalavra.innerHTML = lista[palavra][0];
 
 const mostraPalavra_trad = document.querySelector('[palavra_trad]');
