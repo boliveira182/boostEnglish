@@ -26,6 +26,9 @@ if(lista[palavra][0].length > 11){
 mostraPalavra.innerHTML = lista[palavra][0];
 
 const mostraPalavra_trad = document.querySelector('[palavra_trad]');
+if(lista[palavra][1].length > 11){
+    card__traduzido.style.fontSize='0.6em';
+}
 mostraPalavra_trad.innerHTML = lista[palavra][1];
 
 const palavraGerada = lista[palavra];
