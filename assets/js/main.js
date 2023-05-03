@@ -112,6 +112,9 @@ buttoms.forEach((elements) => {
             form.style.display = "none";
             conhecida__simples.style.display = "block";
             botoes.style.display = "none";
+
+            card.style.display = "flex";
+            card__traduzido.style.display = "none";
             carregaPagina();
         } 
 
@@ -127,6 +130,8 @@ buttoms.forEach((elements) => {
             window.open(`https://www.linguee.com.br/portugues-ingles/search?source=auto&query=${lista[palavra][0]}`, '_blank');
         }
         if(evento.target.value === 'atualizar'){ 
+            card.style.display = "flex";
+            card__traduzido.style.display = "none";
             carregaPagina();
         }    
         if(evento.target.attributes.class.value === 'sobrepor'){ 
