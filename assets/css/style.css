@@ -49,6 +49,7 @@ body {
 .menu__item{
     font-size: 0.3em;
     color: white;
+    cursor: pointer;
    
 }
 
