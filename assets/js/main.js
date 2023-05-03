@@ -12,6 +12,7 @@ carregaPagina();
 function carregaPagina(){
     lista = JSON.parse(localStorage.getItem('dicionario')) || [];
     lista__conhecidas = JSON.parse(localStorage.getItem('conhecidas')) || [];
+    lista__revisar = JSON.parse(localStorage.getItem('revisar')) || [];
     
     if(lista.length === 0){
         lista = preencheLista();
@@ -138,7 +139,21 @@ buttoms.forEach((elements) => {
             form.style.display = "none";
             conhecida__simples.style.display = "block";
             botoes.style.display = "none";
-        }      
+        }  
+
+        if(evento.target.attributes.value.value === 'revisar'){ 
+            lista__revisar.push(palavraGerada);
+            console.log(lista__revisar)
+            localStorage.setItem('revisar', JSON.stringify(lista__revisar));
+
+            form.style.display = "none";
+            conhecida__simples.style.display = "block";
+            botoes.style.display = "none";
+
+            card.style.display = "flex";
+            card__traduzido.style.display = "none";
+            carregaPagina();
+        }     
     })
 })
 
