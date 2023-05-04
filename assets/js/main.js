@@ -7,7 +7,10 @@ const buttoms = document.querySelectorAll('[buttom]');
 const card = document.querySelector('.card');
 const card__traduzido = document.querySelector('.card__traduzido');
 
+const deck__select = document.querySelector('.deck__select');
+
 carregaPagina();
+
 
 function carregaPagina(){
     lista = JSON.parse(localStorage.getItem('dicionario')) || [];
@@ -44,9 +47,7 @@ function carregaPagina(){
     const deletar = document.querySelector('[deletar]');
     const criar = document.querySelector('[criar]');
 
-    deletar.addEventListener('click', (evento) => {
-        evento.preventDefault();
-
+    deletar.addEventListener('click', () => {
         var palavras = JSON.parse(localStorage.getItem('dicionarioOriginal'));
         localStorage.setItem('dicionario', JSON.stringify(palavras));
 
@@ -54,6 +55,8 @@ function carregaPagina(){
         carregaPagina();
     })
 
+
+    console.log(criar)
     criar.addEventListener('click', () => {
         const lista_english = prompt("Digite a lista de palavras em inglês:");
         const textEng = lista_english.replace(/(\r\n|\n|\r)/gm, ".");
@@ -157,7 +160,14 @@ buttoms.forEach((elements) => {
     })
 })
 
+const menu = document.querySelector('.container');
+const menu__lista = document.querySelector('.menu__lista');
+const deck = document.querySelector('.deck');
 
+menu.addEventListener('click', () => {
+    menu.classList.toggle("change");
+    menu__lista.classList.toggle("aparece__lista");
+    deck.classList.toggle("aparece__deck");
+})
 
- 
  
