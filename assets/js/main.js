@@ -8,31 +8,31 @@ const geral = document.querySelector('[geral]');
 const revisar = document.querySelector('[revisar]');
 const card = document.querySelector('.card');
 const card__traduzido = document.querySelector('.card__traduzido');
-const deck__select = document.querySelector('.deck__select');
+const nivel__select = document.querySelector('.nivel__select');
 const container = document.querySelector('.container');
 const menu__lista = document.querySelectorAll('.menu__lista');
-const deck = document.querySelector('.deck');
+const nivel = document.querySelector('.nivel');
 
 
-deckSelecionado = 'deck__select__item1';
+nivelSelecionado = 'nivel__select__item1';
 
 carregaPagina();
 
 geral.addEventListener('click', () => {
-    deckSelecionado = 'deck__select__item1';
+    nivelSelecionado = 'nivel__select__item1';
     mudaMenu();
     carregaPagina();
 })
 
 revisar.addEventListener('click', () => {
-    deckSelecionado = 'deck__select__item2';
+    nivelSelecionado = 'nivel__select__item2';
     mudaMenu();
     carregaPagina();
 })
 
 
 function carregaPagina(){
-    if(deckSelecionado === 'deck__select__item1'){
+    if(nivelSelecionado === 'nivel__select__item1'){
         lista = JSON.parse(localStorage.getItem('dicionario')) || [];
     }else{
         lista = JSON.parse(localStorage.getItem('revisar')) || [];
@@ -164,7 +164,7 @@ container.addEventListener('click', () => {
 
 function mudaMenu(){
     container.classList.toggle("change");
-    deck.classList.toggle("aparece__deck");
+    nivel.classList.toggle("aparece__nivel");
 
     menu__lista.forEach(element => {
         element.classList.toggle("aparece__lista");
