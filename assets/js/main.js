@@ -75,8 +75,8 @@ const criar = document.querySelector('[criar]');
 deletar.addEventListener('click', () => {
     var palavras = JSON.parse(localStorage.getItem('dicionarioOriginal'));
     localStorage.setItem('dicionario', JSON.stringify(palavras));
-
     localStorage.setItem('conhecidas', JSON.stringify([]));
+    mudaMenu();
     carregaPagina();
 })
 
