@@ -9,23 +9,26 @@ const revisar = document.querySelector('[revisar]');
 const card = document.querySelector('.card');
 const card__traduzido = document.querySelector('.card__traduzido');
 const deck__select = document.querySelector('.deck__select');
+const container = document.querySelector('.container');
+const menu__lista = document.querySelectorAll('.menu__lista');
+const deck = document.querySelector('.deck');
 
-// console.log(geral[0].classList.value)
+
 deckSelecionado = 'deck__select__item1';
 
 carregaPagina();
 
 geral.addEventListener('click', () => {
     deckSelecionado = 'deck__select__item1';
+    mudaMenu();
     carregaPagina();
 })
 
 revisar.addEventListener('click', () => {
     deckSelecionado = 'deck__select__item2';
+    mudaMenu();
     carregaPagina();
 })
-
-
 
 
 function carregaPagina(){
@@ -64,64 +67,50 @@ function carregaPagina(){
 
     const totalPalavrasAprenidas = document.querySelector('[aprendidas]');
     totalPalavrasAprenidas.innerHTML = lista__conhecidas.length;
-
-    const deletar = document.querySelector('[deletar]');
-    const criar = document.querySelector('[criar]');
-
-    deletar.addEventListener('click', () => {
-        var palavras = JSON.parse(localStorage.getItem('dicionarioOriginal'));
-        localStorage.setItem('dicionario', JSON.stringify(palavras));
-
-        localStorage.setItem('conhecidas', JSON.stringify([]));
-        carregaPagina();
-    })
-
-
-    console.log(criar)
-    criar.addEventListener('click', () => {
-        const lista_english = prompt("Digite a lista de palavras em inglês:");
-        const textEng = lista_english.replace(/(\r\n|\n|\r)/gm, ".");
-        const original = textEng.split(".");
-
-        const lista_trad = prompt("Digite a lista de palavras traduzidas:");
-        const textPt = lista_trad.replace(/(\r\n|\n|\r)/gm, ".");
-        const traducao = textPt.split(".");
-
-        base = [];
-
-        for (let index = 0; index < original.length; index++) {
-            const palavraOriginal = original[index];
-            const palavraTraduzida = traducao[index];
-
-            base.push([palavraOriginal,palavraTraduzida]);
-        }
-
-        localStorage.setItem('dicionarioOriginal', JSON.stringify(base));
-        localStorage.setItem('dicionario', JSON.stringify(base));
-        window.location.reload();
-    })
 }
     
+const deletar = document.querySelector('[deletar]');
+const criar = document.querySelector('[criar]');
+
+deletar.addEventListener('click', () => {
+    var palavras = JSON.parse(localStorage.getItem('dicionarioOriginal'));
+    localStorage.setItem('dicionario', JSON.stringify(palavras));
+
+    localStorage.setItem('conhecidas', JSON.stringify([]));
+    carregaPagina();
+})
+
+
+criar.addEventListener('click', () => {
+    const lista_english = prompt("Digite a lista de palavras em inglês:");
+    const textEng = lista_english.replace(/(\r\n|\n|\r)/gm, ".");
+    const original = textEng.split(".");
+
+    const lista_trad = prompt("Digite a lista de palavras traduzidas:");
+    const textPt = lista_trad.replace(/(\r\n|\n|\r)/gm, ".");
+    const traducao = textPt.split(".");
+
+    base = [];
+
+    for (let index = 0; index < original.length; index++) {
+        const palavraOriginal = original[index];
+        const palavraTraduzida = traducao[index];
+
+        base.push([palavraOriginal,palavraTraduzida]);
+    }
+
+    localStorage.setItem('dicionarioOriginal', JSON.stringify(base));
+    localStorage.setItem('dicionario', JSON.stringify(base));
+    window.location.reload();
+})
 
 
 buttoms.forEach((elements) => {
     elements.addEventListener('click', (evento) => {
         evento.preventDefault();
 
-        const form = document.querySelector('.sobrepor');
-        const conhecida__simples = document.querySelector('.conhecida__simples');
-        const botoes = document.querySelector('.botoes');
-
         if(evento.target.value === '+'){
-            if(form.style.display != "block"){
-                form.style.display = "block";
-                conhecida__simples.style.display = "none";
-                botoes.style.display = "flex";
-            }else{
-                form.style.display = "none";
-                conhecida__simples.style.display = "block";
-                botoes.style.display = "none";
-            }
+            mudaFundo();
         }
 
         if(evento.target.attributes.value.value === 'conheco'){ 
@@ -133,14 +122,8 @@ buttoms.forEach((elements) => {
             lista.splice(index, 1);
             
             localStorage.setItem('dicionario', JSON.stringify(lista));
-
-            form.style.display = "none";
-            conhecida__simples.style.display = "block";
-            botoes.style.display = "none";
-
-            card.style.display = "flex";
-            card__traduzido.style.display = "none";
-            carregaPagina();
+            mudaFundo(); 
+            carregaPagina();           
         } 
 
         if(evento.target.attributes.value.value=== 'original'){
@@ -158,43 +141,45 @@ buttoms.forEach((elements) => {
             card.style.display = "flex";
             card__traduzido.style.display = "none";
             carregaPagina();
-        }    
-        if(evento.target.attributes.class.value === 'sobrepor'){ 
-            form.style.display = "none";
-            conhecida__simples.style.display = "block";
-            botoes.style.display = "none";
+        }  
+
+        if(evento.target.attributes.class.value === 'sobrepor aparece__fundo'){ 
+            mudaFundo();
         }  
 
         if(evento.target.attributes.value.value === 'revisar'){ 
             lista__revisar.push(palavraGerada);
             console.log(lista__revisar)
             localStorage.setItem('revisar', JSON.stringify(lista__revisar));
-
-            form.style.display = "none";
-            conhecida__simples.style.display = "block";
-            botoes.style.display = "none";
-
-            card.style.display = "flex";
-            card__traduzido.style.display = "none";
+            mudaFundo();
             carregaPagina();
         }     
     })
 })
 
-const container = document.querySelector('.container');
-const menu__lista = document.querySelectorAll('.menu__lista');
-const deck = document.querySelector('.deck');
-
 
 container.addEventListener('click', () => {
+    mudaMenu();
+})
+
+function mudaMenu(){
     container.classList.toggle("change");
     deck.classList.toggle("aparece__deck");
 
     menu__lista.forEach(element => {
         element.classList.toggle("aparece__lista");
     });
-    
-})
+}
+
+const fundo = document.querySelector('.sobrepor');
+const botao = document.querySelector('.conhecida__simples');
+const opcoes = document.querySelector('.botoes');
+
+function mudaFundo(){
+    fundo.classList.toggle("aparece__fundo");
+    botao.classList.toggle("aparece__botao");
+    opcoes.classList.toggle("aparece__fundo");
+}
 
 
 
