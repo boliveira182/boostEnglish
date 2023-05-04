@@ -4,16 +4,37 @@
 //console.log(traducao);
 
 const buttoms = document.querySelectorAll('[buttom]');
+const geral = document.querySelector('[geral]');
+const revisar = document.querySelector('[revisar]');
 const card = document.querySelector('.card');
 const card__traduzido = document.querySelector('.card__traduzido');
-
 const deck__select = document.querySelector('.deck__select');
+
+// console.log(geral[0].classList.value)
+deckSelecionado = 'deck__select__item1';
 
 carregaPagina();
 
+geral.addEventListener('click', () => {
+    deckSelecionado = 'deck__select__item1';
+    carregaPagina();
+})
+
+revisar.addEventListener('click', () => {
+    deckSelecionado = 'deck__select__item2';
+    carregaPagina();
+})
+
+
+
 
 function carregaPagina(){
-    lista = JSON.parse(localStorage.getItem('dicionario')) || [];
+    if(deckSelecionado === 'deck__select__item1'){
+        lista = JSON.parse(localStorage.getItem('dicionario')) || [];
+    }else{
+        lista = JSON.parse(localStorage.getItem('revisar')) || [];
+    }
+    
     lista__conhecidas = JSON.parse(localStorage.getItem('conhecidas')) || [];
     lista__revisar = JSON.parse(localStorage.getItem('revisar')) || [];
     
@@ -160,14 +181,21 @@ buttoms.forEach((elements) => {
     })
 })
 
-const menu = document.querySelector('.container');
-const menu__lista = document.querySelector('.menu__lista');
+const container = document.querySelector('.container');
+const menu__lista = document.querySelectorAll('.menu__lista');
 const deck = document.querySelector('.deck');
 
-menu.addEventListener('click', () => {
-    menu.classList.toggle("change");
-    menu__lista.classList.toggle("aparece__lista");
+
+container.addEventListener('click', () => {
+    container.classList.toggle("change");
     deck.classList.toggle("aparece__deck");
+
+    menu__lista.forEach(element => {
+        element.classList.toggle("aparece__lista");
+    });
+    
 })
+
+
 
  
