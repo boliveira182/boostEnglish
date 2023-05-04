@@ -17,8 +17,8 @@
 }
 
 body {
-    height: 100vh;
-    width: 100vw;
+    /* height: 100vh; */
+    width: 100%;
     background-color: var(--bg-color);
     color: var(--primary-color);
     font-size: 4em;
@@ -29,6 +29,10 @@ body {
     margin:0;
     font-family: var(--font-family);
     gap:30px;
+}
+
+.cabecalho{
+    width: 100%;
 }
 
 .container {
@@ -60,11 +64,9 @@ body {
     justify-content:space-between;
     align-items: center;
     text-align: center;
-    width: 100vw;
     height: 50px;
     background-color: #ff005530;
-    
-  
+    padding: 20px 0 20px 0;
 }
 
 .menu__lista{
@@ -73,6 +75,7 @@ body {
     align-items: center;
     font-size: 0.3em;
     cursor: pointer;
+    font-weight: bold;
 }
 
 .aparece__lista{
@@ -80,15 +83,26 @@ body {
 
 }
 
-.deck{
+.nivel{
     display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     position: absolute;
     height: 50px;
     width: 100%;
     top: 50px;
 }
 
-.deck__select{
+.niveis{
+    color: white;
+    background-color: #000;
+    width: 100%;
+    font-size: 0.3em;
+    padding: 5px 0 5px 0;
+}
+
+.nivel__select{
     display: flex;
     align-items: center;
     justify-content: space-evenly;
@@ -96,7 +110,7 @@ body {
     height: 50px;
 }
 
-.deck__select__item1{
+.nivel__select__item{
     display: flex;
     align-items: center;
     justify-content: center;
@@ -105,27 +119,23 @@ body {
     width: 50%;
     height: 50px;
     background-color: #0A4D68;
+    cursor: pointer;
 }
 
-.deck__select__item2{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 0.3em;
-    color: white;
-    width: 50%;
-    height: 50px;
+ .iniciante{
     background-color: #2a864a;
 }
 
-.aparece__deck{
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    gap: 10px;
+.avancado{
+    background-color: #ac8a2e;
 }
 
 
+.aparece__nivel{
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
 
 .titulo{
     display: flex;
@@ -138,9 +148,12 @@ body {
 .tela{
     width: 100%;
     height: 100%;
-    padding: 5%;
 }
 
+.formulario{
+    position: relative;
+    top: 50px;
+  }
 
 
 .card{
@@ -159,7 +172,6 @@ body {
     font-weight: bold;
     font-size: 0.8em;
     text-overflow: "…";
-
 }
 
 .card__traduzido{
@@ -189,9 +201,7 @@ body {
     margin: 1em;
     color:white;
     font-weight: bold;
-
 }
-
 
 .desconhecida {
     border: 0;
@@ -266,8 +276,6 @@ body {
     box-shadow: inset -2px -2px 3px rgba(255, 255, 255, 0.6), inset 2px 2px 3px rgba(0, 0, 0, 0.6);
 }
 
-
-
 .info{
     display: flex;
     align-items: center;
@@ -292,14 +300,6 @@ hr {
     border: 1px solid black;
     margin-top: 20px;;
   }
-
-  .formulario{
-    width: 100%;
-    height: 100%;
-    position: relative;
-  }
-
-
 
 .botoes{
     display: none;
@@ -355,8 +355,6 @@ hr {
 
   }
 
-
-
   .conhecida__simples__sobrepor{
     display: flex;
     text-align: center;
@@ -368,23 +366,18 @@ hr {
     right: 0;
     bottom: 0;
     margin-right: 10px;
-
     width: 60px;
     height: 60px;
     color:white;
     font-size: 1em;
   }
 
-
-
 .sobrepor{
     display: none;
     width: 100vw;
     height: 100vh;
     background-color: rgba(0, 0, 0, 0.74);
-    position: absolute;
-    
-    
+    position: absolute; 
 }
 
 .aparece__fundo{
@@ -416,3 +409,49 @@ hr {
     color:black;
 }
 
+.deck{
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    top: 100%;
+    width: 100%;
+    padding-top: 30px;
+}
+
+.deck__label{
+    background-color: #000;
+    font-size: 0.2em;
+    color: white;
+    width: 100%;
+    padding: 5px 0 5px 0;
+}
+
+.deck__itens{
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.deck__select__item1{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.3em;
+    color: white;
+    width: 50%;
+    height: 50px;
+    background-color: #0A4D68;
+    cursor: pointer;
+}
+
+.deck__select__item2{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.3em;
+    color: white;
+    width: 50%;
+    height: 50px;
+    background-color: #0d680a;
+    cursor: pointer;
+}
