@@ -4,13 +4,15 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" type="image/jpg" href="./assets/img/icon.png"/>
+    <!-- <img class="robo" src="./assets/img/icon.png" alt="Robotron"> -->
     <title>Boost English</title>
     <link rel="stylesheet" href="./assets/css/reset.css">
     <link rel="stylesheet" href="./assets/css/style.css">
 
 </head>
 <body>
-    <header>
+    <header class="cabecalho">
         <div  class="menu">
             <div class="container">
                 <div class="bar1"></div>
@@ -21,15 +23,17 @@
             <span class="menu__lista" criar>Criar </span>
             <span class="menu__lista" deletar >Recomeçar</span>
         </div>
-        <div class="deck">
-            <ul class="deck__select">
-                <li class="deck__select__item1" geral>Geral</li>
-                <li class="deck__select__item2" revisar>Revisar</li>
+        <div class="nivel">
+            <label class="niveis">Ecolha seu nível</label>
+            <ul class="nivel__select">
+                <li class="nivel__select__item iniciante" nivel value="iniciante">Iniciante</li>
+                <li class="nivel__select__item inter" nivel value="intermediario">Intermediário</li>
+                <li class="nivel__select__item avancado" nivel value="avancado">Avançado</li>
             </ul>
         </div>
     </header>
 
-    <main class="tela">
+    <section class="tela">
         <form action="" class="formulario" id="meu_dicionario">
             <label class="titulo"> <u>WORD</u></label>
             <div class="card"  value="original" buttom palavra> </div>
@@ -65,7 +69,15 @@
             </div> 
         </form>
        
-    </main>
+    </section>
+
+    <section class="deck">
+            <label class="deck__label"> Opções de DECK: </label>
+            <ul class="deck__itens">
+                <li class="deck__select__item1" geral>Geral</li>
+                <li class="deck__select__item2" revisar>Revisar</li>
+            </ul>
+    </section>
 
     <div class="sobrepor" value="sobrepor" buttom></div>
     
