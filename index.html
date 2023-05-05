@@ -9,6 +9,7 @@
     <title>Boost English</title>
     <link rel="stylesheet" href="./assets/css/reset.css">
     <link rel="stylesheet" href="./assets/css/style.css">
+    <link rel="stylesheet" href="./assets/css/inicio.css">
 
 </head>
 <body>
@@ -19,9 +20,9 @@
                 <div class="bar2"></div>
                 <div class="bar3"></div>
             </div>
-            
-            <span class="menu__lista" criar>Criar </span>
+            <span style="display:none"class="menu__lista" criar>Criar Deck</span>
             <span class="menu__lista" deletar >Recomeçar</span>
+            <span class="menu__lista" configurar >Configurações</span>
         </div>
         <div class="nivel">
             <label class="niveis">Ecolha seu nível</label>
@@ -32,6 +33,35 @@
             </ul>
         </div>
     </header>
+
+    <section class="inicio">
+        <h1 class="titulo__inicio">Selecionar configurações:</h1>
+        <div class="borda">
+            <div class="inicio__itens">
+                <h3 class="inicio__titulo">NÍVEL</h3>
+                <div class="custom-select">
+                    <select class="seletor">
+                        <option class='custom-select__item' value="0">Select nível:</option>
+                        <option class='custom-select__item' value="iniciante">Iniciante</option>
+                        <option class='custom-select__item' value="intermediario">Intermediário</option>
+                        <option class='custom-select__item' value="avancado">Avançado</option>
+                    </select>
+                </div>
+            </div>
+            <div class="inicio__itens">
+                <h3 class="inicio__titulo">DECK</h3>
+                <div class="custom-select">
+                    <select  class="seletor">
+                        <option class='custom-select__item' value="0">Select deck:</option>
+                        <option class='custom-select__item' value="palavras">Palavras</option>
+                        <option class='custom-select__item' value="phrasal">Phrasal verbs</option>
+                    </select>
+                </div>
+            </div>
+
+            <button class='iniciar disabled' iniciar type="button">INICIAR</button>
+        </div>
+    </section>
 
     <section class="tela">
         <form action="" class="formulario" id="meu_dicionario">
@@ -51,7 +81,7 @@
                     <hr>
                     <strong><span class="box__info" total></span></strong>
                 </div>
-                <hr>
+              
                 <div class="result">
                     <p class="info__text">Palavras aprendidas:</p>
                     <hr>
@@ -83,5 +113,6 @@
     
     <script src="./assets/js/lista.js"></script>
     <script src="./assets/js/main.js"></script>
+    <script src="./assets/js/inicio.js"></script>
 </body>
 </html>
