@@ -243,7 +243,7 @@ function setaVariaveis(select){
     nivelSelecionado = select[0];
     deckSelecionado = 'geral';
     localStorage.setItem('configuracoes', JSON.stringify(select));   
-    carregaPagina(); 
+    carregaPagina();
 }
 
 
