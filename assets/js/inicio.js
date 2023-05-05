@@ -7,6 +7,7 @@ if(configuracoes.length != 0){
     inicio.style.display = "none";
     tela.style.display = "block";
     setaVariaveis(configuracoes);
+
 }else{
     inicio.style.display = "flex";
     tela.style.display = "none";
