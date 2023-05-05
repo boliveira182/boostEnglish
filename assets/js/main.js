@@ -15,8 +15,12 @@ const menu__lista = document.querySelectorAll('.menu__lista');
 const nivel = document.querySelectorAll('[nivel]');
 const deletar = document.querySelector('[deletar]');
 const criar = document.querySelector('[criar]');
+const configurar = document.querySelector('[configurar]');
 
-setaVariaveis();
+nivelSelecionado = 'Iniciante';
+deckSelecionado = 'geral';
+
+
 
 //Essa função permite a criação do banco de palavras que são mostradas aos usuários
 criar.addEventListener('click', () => {
@@ -48,10 +52,19 @@ deletar.addEventListener('click', () => {
     lista = preencheLista();
     localStorage.setItem('dicionario', JSON.stringify(lista));
     localStorage.setItem('conhecidas', JSON.stringify([]));
+    localStorage.setItem('configuracoes', JSON.stringify([]));
     localStorage.setItem('indices', JSON.stringify(['1000', '3000', '10000']));
     window.location.reload();
 })
 
+
+//Essa função permite alterar as configurações iniciais
+configurar.addEventListener('click', () => {
+    inicio.style.display = "flex";
+    tela.style.display = "none";
+    localStorage.setItem('configuracoes', JSON.stringify(''));
+    mudaMenu();
+})
 
 //Essa função permite selecionar o Deck, se é o geral (contém todas as palavras) ou se é o revisar (contém as palavras marcadas para revisão)
 deck.forEach(element => {
@@ -87,7 +100,7 @@ function carregaPagina(){
         revisao = "sim";
     }
     
-    if(nivelSelecionado ==="iniciante"){  
+    if(nivelSelecionado ==="Iniciante"){  
         itens = tamanho[0];
         lista = lista.slice(0, itens);
         indice = [tamanho[0]-1, tamanho[1]-1, tamanho[2]-1]
@@ -226,9 +239,11 @@ function mudaFundo(){
     opcoes.classList.toggle("aparece__fundo");
 }
 
-function setaVariaveis(){
+function setaVariaveis(select){
+    nivelSelecionado = select[0];
     deckSelecionado = 'geral';
-    nivelSelecionado = 'iniciante';
+    localStorage.setItem('configuracoes', JSON.stringify(select));   
+    carregaPagina(); 
 }
 
 
