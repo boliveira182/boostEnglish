@@ -122,6 +122,10 @@ buttoms.forEach((elements) => {
             lista.splice(index, 1);
             
             localStorage.setItem('dicionario', JSON.stringify(lista));
+            
+            card.style.display = "flex";
+            card__traduzido.style.display = "none";
+            
             mudaFundo(); 
             carregaPagina();           
         } 
