@@ -10,6 +10,7 @@
 .borda{
     border: 5px double black;
     width: 90%;
+    margin-top: 30px;
 }
 .titulo__inicio{
     font-size: 0.5em;
