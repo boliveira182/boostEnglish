@@ -1,43 +1,56 @@
-//const lista_trad = prompt("Digite as palavras");
-//const newText = lista_trad.replace(/(\r\n|\n|\r)/gm, ".");
-//const traducao = newText.split(".");
-//console.log(traducao);
+// const lista_trad = prompt("Digite as palavras");
+// const newText = lista_trad.replace(/(\r\n|\n|\r)/gm, ".");
+// const traducao = newText.split(".");
+// console.log(traducao);
 
 const buttoms = document.querySelectorAll('[buttom]');
 const geral = document.querySelector('[geral]');
 const revisar = document.querySelector('[revisar]');
 const card = document.querySelector('.card');
 const card__traduzido = document.querySelector('.card__traduzido');
-const nivel__select = document.querySelector('.nivel__select');
+const nivel__select = document.querySelector('.nivel');
+const deck = document.querySelectorAll('[deck]');
+
 const container = document.querySelector('.container');
 const menu__lista = document.querySelectorAll('.menu__lista');
-const nivel = document.querySelector('.nivel');
+const nivel = document.querySelectorAll('[nivel]');
 
 
-nivelSelecionado = 'nivel__select__item1';
+deckSelecionado = 'geral';
+nivelSelecionado = 'iniciante';
 
 carregaPagina();
 
-geral.addEventListener('click', () => {
-    nivelSelecionado = 'nivel__select__item1';
-    mudaMenu();
-    carregaPagina();
-})
+deck.forEach(element => {
+    element.addEventListener('click', () => {
+        deckSelecionado = element.attributes.value.value;
+        carregaPagina();
+    })
+});
 
-revisar.addEventListener('click', () => {
-    nivelSelecionado = 'nivel__select__item2';
-    mudaMenu();
-    carregaPagina();
-})
+nivel.forEach(element => {
+    element.addEventListener('click', () => {
+        nivelSelecionado = element.attributes.value.value;
+        carregaPagina();
+        mudaMenu();
+    })
+});
 
 
 function carregaPagina(){
-    if(nivelSelecionado === 'nivel__select__item1'){
+    if(deckSelecionado === 'geral'){
         lista = JSON.parse(localStorage.getItem('dicionario')) || [];
     }else{
         lista = JSON.parse(localStorage.getItem('revisar')) || [];
     }
     
+    if(nivelSelecionado ==="iniciante"){
+        lista = lista.slice(0, 1000);
+    }
+    if(nivelSelecionado ==="intermediario"){
+        lista = lista.slice(0, 3000);
+    }
+
     lista__conhecidas = JSON.parse(localStorage.getItem('conhecidas')) || [];
     lista__revisar = JSON.parse(localStorage.getItem('revisar')) || [];
     
@@ -45,6 +58,8 @@ function carregaPagina(){
         lista = preencheLista();
         localStorage.setItem('dicionario', JSON.stringify(lista));
     }
+
+
 
     palavra = Math.floor(Math.random() * lista.length);
     const mostraPalavra = document.querySelector('[palavra]');
@@ -122,10 +137,10 @@ buttoms.forEach((elements) => {
             lista.splice(index, 1);
             
             localStorage.setItem('dicionario', JSON.stringify(lista));
-            
+
             card.style.display = "flex";
             card__traduzido.style.display = "none";
-            
+
             mudaFundo(); 
             carregaPagina();           
         } 
@@ -168,7 +183,7 @@ container.addEventListener('click', () => {
 
 function mudaMenu(){
     container.classList.toggle("change");
-    nivel.classList.toggle("aparece__nivel");
+    nivel__select.classList.toggle("aparece__nivel");
 
     menu__lista.forEach(element => {
         element.classList.toggle("aparece__lista");
