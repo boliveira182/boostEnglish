@@ -100,7 +100,7 @@ function carregaPagina(){
         revisao = "sim";
     }
     
-    if(nivelSelecionado ==="Iniciante"){  
+    if(nivelSelecionado ==="iniciante"){  
         itens = tamanho[0];
         lista = lista.slice(0, itens);
         indice = [tamanho[0]-1, tamanho[1]-1, tamanho[2]-1]
