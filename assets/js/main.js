@@ -1,250 +1,154 @@
-// const lista_trad = prompt("Digite as palavras");
-// const newText = lista_trad.replace(/(\r\n|\n|\r)/gm, ".");
-// const traducao = newText.split(".");
-// console.log(traducao);
-
-const buttoms = document.querySelectorAll('[buttom]');
-const geral = document.querySelector('[geral]');
-const revisar = document.querySelector('[revisar]');
-const card = document.querySelector('.card');
-const card__traduzido = document.querySelector('.card__traduzido');
-const nivel__select = document.querySelector('.nivel');
-const deck = document.querySelectorAll('[deck]');
-const container = document.querySelector('.container');
-const menu__lista = document.querySelectorAll('.menu__lista');
-const nivel = document.querySelectorAll('[nivel]');
-const deletar = document.querySelector('[deletar]');
-const criar = document.querySelector('[criar]');
-const configurar = document.querySelector('[configurar]');
-
-nivelSelecionado = 'Iniciante';
-deckSelecionado = 'geral';
+const iniciar = document.querySelector('[iniciar]');
+configuraInicio();
 
 
-
-//Essa função permite a criação do banco de palavras que são mostradas aos usuários
-criar.addEventListener('click', () => {
-    const lista_english = prompt("Digite a lista de palavras em inglês:");
-    const textEng = lista_english.replace(/(\r\n|\n|\r)/gm, ".");
-    const original = textEng.split(".");
-
-    const lista_trad = prompt("Digite a lista de palavras traduzidas:");
-    const textPt = lista_trad.replace(/(\r\n|\n|\r)/gm, ".");
-    const traducao = textPt.split(".");
-
-    base = [];
-
-    for (let index = 0; index < original.length; index++) {
-        const palavraOriginal = original[index];
-        const palavraTraduzida = traducao[index];
-
-        base.push([palavraOriginal,palavraTraduzida]);
-    }
-
-    localStorage.setItem('dicionarioOriginal', JSON.stringify(base));
-    localStorage.setItem('dicionario', JSON.stringify(base));
-    window.location.reload();
-})
-
-
-//Essa função reseta os Decks e reinicia o programa
-deletar.addEventListener('click', () => {
-    lista = preencheLista();
-    localStorage.setItem('dicionario', JSON.stringify(lista));
-    localStorage.setItem('conhecidas', JSON.stringify([]));
-    localStorage.setItem('configuracoes', JSON.stringify([]));
-    localStorage.setItem('indices', JSON.stringify(['1000', '3000', '10000']));
-    window.location.reload();
-})
-
-
-//Essa função permite alterar as configurações iniciais
-configurar.addEventListener('click', () => {
-    inicio.style.display = "flex";
-    tela.style.display = "none";
-    localStorage.setItem('configuracoes', JSON.stringify(''));
-    mudaMenu();
-})
-
-//Essa função permite selecionar o Deck, se é o geral (contém todas as palavras) ou se é o revisar (contém as palavras marcadas para revisão)
-deck.forEach(element => {
-    element.addEventListener('click', () => {
-        deckSelecionado = element.attributes.value.value;
-        carregaPagina();
-    })
-});
-
-//Função que permite selecionar o nível de difículdade do programa
-nivel.forEach(element => {
-    element.addEventListener('click', () => {
-        nivelSelecionado = element.attributes.value.value;
-        carregaPagina();
-        mudaMenu();
-    })
-});
-
-
-
-carregaPagina();
-function carregaPagina(){
-    tamanho = JSON.parse(localStorage.getItem('indices')) || [];
-    revisao = 'nao';
-
-    if(deckSelecionado === 'geral'){
-        lista__completa = JSON.parse(localStorage.getItem('dicionario')) || [];
-        lista = lista__completa;
-        revisao = "nao"; 
-    }else{
-        lista = JSON.parse(localStorage.getItem('revisar')) || [];
-        lista__revisao = lista.length;
-        revisao = "sim";
-    }
-    
-    if(nivelSelecionado ==="iniciante"){  
-        itens = tamanho[0];
-        lista = lista.slice(0, itens);
-        indice = [tamanho[0]-1, tamanho[1]-1, tamanho[2]-1]
-    }
-    if(nivelSelecionado ==="intermediario"){
-        itens = tamanho[1];
-        lista = lista.slice(0, itens);
-        indice = [tamanho[0], tamanho[1]-1, tamanho[2]-1]
-    }
-    if(nivelSelecionado ==="avancado"){
-        itens = tamanho[2];
-        indice = [tamanho[0], tamanho[1], tamanho[2]-1]
-    }
-
-    lista__conhecidas = JSON.parse(localStorage.getItem('conhecidas')) || [];
-    lista__revisar = JSON.parse(localStorage.getItem('revisar')) || [];
-    
-    if(lista.length === 0){
-        lista = preencheLista();
-        localStorage.setItem('dicionario', JSON.stringify(lista));
-    }
-
-    palavra = Math.floor(Math.random() * lista.length);
-    const mostraPalavra = document.querySelector('[palavra]');
-
-    if(lista[palavra][0].length > 11){
-        card.style.fontSize='0.6em';
-    }
-    mostraPalavra.innerHTML = lista[palavra][0];
-
-    const mostraPalavra_trad = document.querySelector('[palavra_trad]');
-    if(lista[palavra][1].length > 11){
-        card__traduzido.style.fontSize='0.6em';
-    }
-    mostraPalavra_trad.innerHTML = lista[palavra][1];
-
-    palavraGerada = lista[palavra];
-
-    const totalPalavras = document.querySelector('[total]');
-
-    if(revisao ==='sim'){
-        totalPalavras.innerHTML = lista__revisao;
-    }else{
-        totalPalavras.innerHTML = lista.length;
-    }
-    
-    const totalPalavrasAprenidas = document.querySelector('[aprendidas]');
-    totalPalavrasAprenidas.innerHTML = lista__conhecidas.length;
-}
-    
-buttoms.forEach((elements) => {
-    elements.addEventListener('click', (evento) => {
-        evento.preventDefault();
-
-        if(evento.target.value === '+'){
-            mudaFundo();
-        }
-
-        if(evento.target.attributes.value.value === 'conheco'){ 
-            lista__conhecidas.push(palavraGerada);
-       
-            localStorage.setItem('conhecidas', JSON.stringify(lista__conhecidas));
-
-            index = lista__completa.indexOf(palavraGerada);
-            lista__completa.splice(index, 1);
-            
-            localStorage.setItem('dicionario', JSON.stringify(lista__completa));
-
-            localStorage.setItem('indices', JSON.stringify(indice));
-
-            if(revisao ==="sim"){
-                index = lista__revisar.indexOf(palavraGerada);
-                lista__revisar.splice(index, 1);
-                localStorage.setItem('revisar', JSON.stringify(lista__revisar));
+//funão que irá mostrar as caixas de seleção 
+var x, i, j, l, ll, selElmnt, a, b, c;
+/*look for any elements with the class "custom-select":*/
+x = document.getElementsByClassName("custom-select");
+l = x.length;
+for (i = 0; i < l; i++) {
+  selElmnt = x[i].getElementsByTagName("select")[0];
+  ll = selElmnt.length;
+  /*for each element, create a new DIV that will act as the selected item:*/
+  a = document.createElement("DIV");
+  a.setAttribute("class", "select-selected");
+ 
+  a.innerHTML = selElmnt.options[selElmnt.selectedIndex].innerHTML;
+  x[i].appendChild(a);
+  /*for each element, create a new DIV that will contain the option list:*/
+  b = document.createElement("DIV");
+  b.setAttribute("class", "select-items select-hide");
+  for (j = 1; j < ll; j++) {
+    /*for each option in the original select element,
+    create a new DIV that will act as an option item:*/
+    c = document.createElement("DIV");
+    c.innerHTML = selElmnt.options[j].innerHTML;
+    c.addEventListener("click", function(e) {
+        /*when an item is clicked, update the original select box,
+        and the selected item:*/
+        var y, i, k, s, h, sl, yl;
+        s = this.parentNode.parentNode.getElementsByTagName("select")[0];
+        sl = s.length;
+        h = this.parentNode.previousSibling;
+        for (i = 0; i < sl; i++) {
+          if (s.options[i].innerHTML == this.innerHTML) {
+            s.selectedIndex = i;
+            h.innerHTML = this.innerHTML;
+            y = this.parentNode.getElementsByClassName("same-as-selected");
+            yl = y.length;
+            for (k = 0; k < yl; k++) {
+              y[k].removeAttribute("class");
             }
-
-            card.style.display = "flex";
-            card__traduzido.style.display = "none";
-
-            mudaFundo(); 
-            carregaPagina();           
-        } 
-
-        if(evento.target.attributes.value.value=== 'original'){
-            card.style.display = "none";
-            card__traduzido.style.display = "flex";
+            this.setAttribute("class", "same-as-selected");
+            verificaSelect();
+            break;
+          }
         }
-        if(evento.target.attributes.value.value=== 'traduzido'){
-            card__traduzido.style.display = "none";
-            card.style.display = "flex";
+        h.click();
+    });
+    b.appendChild(c);
+  }
+  x[i].appendChild(b);
+  a.addEventListener("click", function(e) {
+      /*when the select box is clicked, close any other select boxes,
+      and open/close the current select box:*/
+      e.stopPropagation();
+      closeAllSelect(this);
+      this.nextSibling.classList.toggle("select-hide");
+      this.classList.toggle("select-arrow-active");
+    });
+}
+function closeAllSelect(elmnt) {
+  /*a function that will close all select boxes in the document,
+  except the current select box:*/
+  var x, y, i, xl, yl, arrNo = [];
+  x = document.getElementsByClassName("select-items");
+  y = document.getElementsByClassName("select-selected");
+  xl = x.length;
+  yl = y.length;
+  for (i = 0; i < yl; i++) {
+    if (elmnt == y[i]) {
+      arrNo.push(i)
+    } else {
+      y[i].classList.remove("select-arrow-active");
+    }
+  }
+  for (i = 0; i < xl; i++) {
+    if (arrNo.indexOf(i)) {
+      x[i].classList.add("select-hide");
+    }
+  }
+}
+/*if the user clicks anywhere outside the select box,
+then close all select boxes:*/
+document.addEventListener("click", closeAllSelect);
+
+
+//função que verifica se todas as caixas de seleção foram preenchidas 
+function verificaSelect(){
+    const qtd = document.querySelectorAll('.same-as-selected');
+    if(qtd.length >1){
+        iniciar.classList.remove('disabled');
+    }
+}
+
+
+//função que vai fazer as configurações iniciais do programa 
+function configuraInicio(){
+    const inicio = document.querySelector('.inicio');
+    const words = document.querySelector('.palavras');
+    const phrasal = document.querySelector('.phrasal');
+
+    //verifica se as configurações iniciais foram setadas no local storage 
+    const configuracoes = JSON.parse(localStorage.getItem('configuracoes')) || [];
+    habilitaTela('inicio');
+
+
+    //se as configurações inicias não foram setadas, impede a exibição das demais telas, além da inicial 
+    if(configuracoes.length != 0){
+        habilitaTela(configuracoes[1]);
+        setaVariaveis(configuracoes);
+
+    }else{
+        iniciar.addEventListener('click', () => {
+            const nivel__selected = document.querySelector('.seletor__nivel');
+            const deck__selected = document.querySelector('.seletor__deck');
+            const selecionados = [];
+            selecionados.push(nivel__selected.value, deck__selected.value)
+            habilitaTela(deck__selected.value);
+            setaVariaveis(selecionados);
+        })
+        
+    }
+}
+
+
+function setaVariaveis(configuracoes){
+    localStorage.setItem('configuracoes', JSON.stringify(configuracoes)); 
+    carregaPagina(configuracoes);  
+}
+
+
+function habilitaTela(telaPassada){
+    const telas = document.querySelectorAll('[tela]');
+    const tela = document.querySelector(`.${telaPassada}`);
+
+    telas.forEach(element => {
+        if(telaPassada != element.attributes.value.value){
+            element.style.display = "none";
+        }else{
+            if(element.attributes.value.value === 'inicio'){
+                tela.style.display = "flex";
+            }else{
+                tela.style.display = "block";
+            }
         }
-        if(evento.target.value === 'minerar'){  
-            window.open(`https://www.linguee.com.br/portugues-ingles/search?source=auto&query=${lista[palavra][0]}`, '_blank');
-        }
-        if(evento.target.value === 'atualizar'){ 
-            card.style.display = "flex";
-            card__traduzido.style.display = "none";
-            carregaPagina();
-        }  
-
-        if(evento.target.attributes.class.value === 'sobrepor aparece__fundo'){ 
-            mudaFundo();
-        }  
-
-        if(evento.target.attributes.value.value === 'revisar'){ 
-            lista__revisar.push(palavraGerada);
-            console.log(lista__revisar)
-            localStorage.setItem('revisar', JSON.stringify(lista__revisar));
-            mudaFundo();
-            carregaPagina();
-        }     
-    })
-})
-
-
-container.addEventListener('click', () => {
-    mudaMenu();
-})
-
-function mudaMenu(){
-    container.classList.toggle("change");
-    nivel__select.classList.toggle("aparece__nivel");
-
-    menu__lista.forEach(element => {
-        element.classList.toggle("aparece__lista");
     });
 }
 
-const fundo = document.querySelector('.sobrepor');
-const botao = document.querySelector('.conhecida__simples');
-const opcoes = document.querySelector('.botoes');
-
-function mudaFundo(){
-    fundo.classList.toggle("aparece__fundo");
-    botao.classList.toggle("aparece__botao");
-    opcoes.classList.toggle("aparece__fundo");
+function carregaPagina(configuracoes){
+  if(configuracoes[1] === "palavras"){
+      carregaPaginaPalavras(configuracoes[0], 'geral');
+  }
 }
-
-function setaVariaveis(select){
-    nivelSelecionado = select[0];
-    deckSelecionado = 'geral';
-    localStorage.setItem('configuracoes', JSON.stringify(select));   
-    carregaPagina();
-}
-
-
- 
