@@ -121,9 +121,8 @@ deletar.addEventListener('click', () => {
 
 //Essa função permite alterar as configurações iniciais
 configurar.addEventListener('click', () => {
-    inicio.style.display = "flex";
-    tela.style.display = "none";
-    localStorage.setItem('configuracoes', JSON.stringify(''));
+    habilitaTela('inicio');
+    localStorage.setItem('configuracoes', JSON.stringify([]));
     mudaMenu();
 })
 
@@ -256,7 +255,5 @@ function mudaFundo(){
     botao.classList.toggle("aparece__botao");
     opcoes.classList.toggle("aparece__fundo");
 }
-
-
 
  
