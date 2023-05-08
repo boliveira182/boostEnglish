@@ -150,4 +150,7 @@ function carregaPagina(configuracoes){
   if(configuracoes[1] === "palavras"){
       carregaPaginaPalavras(configuracoes[0], 'geral');
   }
+  if(configuracoes[1] === "phrasal"){
+    carregaPaginaPhrasal(configuracoes[0], 'phrasal');
+}
 }
