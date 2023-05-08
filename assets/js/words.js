@@ -110,11 +110,16 @@ criar.addEventListener('click', () => {
 //Essa função reseta os Decks e reinicia o programa
 deletar.addEventListener('click', () => {
     lista = preencheLista();
+    lista__phrasal = geraPhrasesVerbs();
     localStorage.setItem('dicionario', JSON.stringify(lista));
+    localStorage.setItem('dicionario__phrasal', JSON.stringify(lista__phrasal));
     localStorage.setItem('conhecidas', JSON.stringify([]));
+    localStorage.setItem('conhecidas__phrasal', JSON.stringify([]));
     localStorage.setItem('configuracoes', JSON.stringify([]));
     localStorage.setItem('revisar', JSON.stringify([]));
+    localStorage.setItem('revisar__phrasal', JSON.stringify([]));
     localStorage.setItem('indices', JSON.stringify(['1000', '3000', '10000']));
+    localStorage.setItem('indices__phrasal', JSON.stringify(['1000', '2000', '3208']));
     window.location.reload();
 })
 
