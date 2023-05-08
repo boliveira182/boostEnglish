@@ -50,17 +50,20 @@ function preencheDadosNaTelaPhrasal(palavra, lista, tamanho){
 
 
 // Selecione o botão e a div
-var meuBotao = document.querySelector('[botao__significado]');
-var minhaDiv = document.getElementById("conteudo");
+var meuBotao = document.querySelectorAll('[botao__phrasal]');
+var minhaDiv = document.querySelector('[conteudo]');
 
-// Adicione um evento de clique ao botão
-meuBotao.addEventListener("click", function() {
-    // Se a div estiver oculta, mostre-a com animação
-    if (minhaDiv.style.height === "0px") {
-        minhaDiv.style.height = "100px"; // Defina a altura desejada da div
-    }
-    // Se a div estiver visível, oculte-a com animação
-    else {
-        minhaDiv.style.height = "0";
-    }
+
+meuBotao.forEach(element => {
+    // Adicione um evento de clique ao botão
+    element.addEventListener("click", function() {
+        // Se a div estiver oculta, mostre-a com animação
+        if (minhaDiv.style.height === "0px") {
+            minhaDiv.style.height = "100px"; // Defina a altura desejada da div
+        }
+        // Se a div estiver visível, oculte-a com animação
+        else {
+            minhaDiv.style.height = "0";
+        }
+    });
 });
