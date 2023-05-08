@@ -462,7 +462,7 @@ hr {
     width: 100%;
 }
 
-#conteudo{
+.conteudo{
     display: flex;
     align-items: center;
     justify-content: flex-start;
