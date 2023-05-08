@@ -4,7 +4,7 @@ function carregaPaginaPhrasal(nivel, deckSelecionado){
     nivelSelecionado = nivel;
     deckSelect = deckSelecionado;
 
-    var lista = JSON.parse(localStorage.getItem('dicionario__phrasal')) || [];
+    lista = JSON.parse(localStorage.getItem('dicionario__phrasal')) || [];
     const indices = JSON.parse(localStorage.getItem('indices__phrasal')) || [];
     var tamanho = 0;
 
@@ -30,17 +30,13 @@ function carregaPaginaPhrasal(nivel, deckSelecionado){
 
 function preencheDadosNaTelaPhrasal(palavra, lista, tamanho){
     const mostraPalavra = document.querySelector('[phrasal]');
-    const significado = document.querySelector('[significado]');
     const aprendidas__phrasal = JSON.parse(localStorage.getItem('conhecidas__phrasal')) || [];
 
-    // if(lista[palavra][0].length > 11){
-    //     card.style.fontSize='0.6em';
-    // }
-
-    mostraPalavra.innerHTML = lista[palavra][0];
-    significado.innerHTML = lista[palavra][1];
-    palavraGerada = lista[palavra];
-
+    if(lista[palavra][0].length > 11){
+        card.style.fontSize='0.6em';
+    }
+    preencheConteudo(mostraPalavra, lista[palavra][0]);
+    // preencheConteudo(mostraPalavra, lista[palavra][0]);
     // const totalPalavras = document.querySelector('[restantes]');
     // totalPalavras.innerHTML = tamanho;
 
@@ -48,22 +44,44 @@ function preencheDadosNaTelaPhrasal(palavra, lista, tamanho){
     // totalPalavrasAprenidas.innerHTML = aprendidas.length;
 }
 
+function preencheConteudo(local, conteudo){
+    local.innerHTML = conteudo;
+}
 
-// Selecione o botão e a div
+
+// Selecione o botão e a div e campo significado
 var meuBotao = document.querySelectorAll('[botao__phrasal]');
-var minhaDiv = document.querySelector('[conteudo]');
+var significado = document.querySelectorAll('[significado]');
 
 
 meuBotao.forEach(element => {
     // Adicione um evento de clique ao botão
     element.addEventListener("click", function() {
+        const conteudo = element.attributes.value.value;
+        var valor = [];
+        var local =";"
+        if(conteudo === 'significado'){
+            valor = lista[palavra][1]
+            local = document.querySelector(`[${conteudo}]`);
+        }
+        if(conteudo === 'exemplo'){
+            valor = lista[palavra][2];
+            local = document.querySelector(`[${conteudo}]`);
+        }
+        if(conteudo === 'traducao'){
+            valor = lista[palavra][2];
+            local = document.querySelector(`[${conteudo}]`);
+        }
+        console.log(valor);
+        preencheConteudo(local, valor);
+
         // Se a div estiver oculta, mostre-a com animação
-        if (minhaDiv.style.height === "0px") {
-            minhaDiv.style.height = "100px"; // Defina a altura desejada da div
+        if (local.style.height === "0px") {
+            local.style.height = "100px"; // Defina a altura desejada da div
         }
         // Se a div estiver visível, oculte-a com animação
         else {
-            minhaDiv.style.height = "0";
+            local.style.height = "0";
         }
     });
 });
