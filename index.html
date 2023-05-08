@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" type="image/jpg" href="./assets/img/icon.png"/>
+
     <!-- <img class="robo" src="./assets/img/icon.png" alt="Robotron"> -->
     <title>Boost English</title>
     <link rel="stylesheet" href="./assets/css/reset.css">
@@ -103,16 +104,17 @@
 
 
     <section class="phrasal" tela value="phrasal">
-        <form action="" class="formulario" id="meu_dicionario">
-            <label class="titulo"> <u>WORD</u></label>
-            <div class="card"  value="original" buttom palavra> </div>
 
-            <div class="card__traduzido" value="traduzido" buttom palavra_trad> 
-            </div>
-           
+        <form action="" class="formulario">
+            <label class="titulo"> <u>Phrasal Verbs</u></label>
+            <div class="card"  value="original" buttom phrasal> </div>
             <hr>
-            <button class="favorite minerar" type="button" value='minerar' buttom>Minerar </button>
-            <button class="favorite atualizar" type="button" value='atualizar' buttom>Próxima </button>
+            <ul class="phrasal_opttions">
+                <li class="deck__select__item1" botao__significado >Significado</li>
+                <li class="deck__select__item2" botao__exemplo>Exemplo</li>
+                <li class="deck__select__item1" botao__traducao>Tradução</li>
+            </ul>
+            <div id="conteudo"><span class="significado" significado></span></div>
             <hr>
             <div class="info">
                 <div class="result">
@@ -120,7 +122,6 @@
                     <hr>
                     <strong><span class="box__info" total></span></strong>
                 </div>
-              
                 <div class="result">
                     <p class="info__text">Palavras aprendidas:</p>
                     <hr>
@@ -136,8 +137,7 @@
                     <li class="menu__flutuante__botoes__links" value="revisar" buttom>Revisar</li>
                 </ul>
             </div> 
-        </form>
-       
+        </form>      
     </section>
 
     <section class="deck">
@@ -152,8 +152,8 @@
     
     <script src="./assets/js/lista.js"></script>
     <script src="./assets/js/words.js"></script>
+    <script src="./assets/js/phrasesVerbs.js"></script>
     <script src="./assets/js/main.js"></script>
     <!-- <script src="./assets/js/gera__lista.js"></script> -->
-    <script src="./assets/js/phrasesVerbs.js"></script>
 </body>
 </html>
