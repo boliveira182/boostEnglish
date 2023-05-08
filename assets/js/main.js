@@ -102,8 +102,6 @@ function configuraInicio(){
 
     //verifica se as configurações iniciais foram setadas no local storage 
     const configuracoes = JSON.parse(localStorage.getItem('configuracoes')) || [];
-    habilitaTela('inicio');
-
 
     //se as configurações inicias não foram setadas, impede a exibição das demais telas, além da inicial 
     if(configuracoes.length != 0){
@@ -111,6 +109,7 @@ function configuraInicio(){
         setaVariaveis(configuracoes);
 
     }else{
+        habilitaTela('inicio');
         iniciar.addEventListener('click', () => {
             const nivel__selected = document.querySelector('.seletor__nivel');
             const deck__selected = document.querySelector('.seletor__deck');
