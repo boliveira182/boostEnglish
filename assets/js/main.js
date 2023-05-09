@@ -122,6 +122,20 @@ function configuraInicio(){
     }
 }
 
+const deck = document.querySelectorAll('[deck]');
+//Essa função permite selecionar o Deck, se é o geral (contém todas as palavras) ou se é o revisar (contém as palavras marcadas para revisão)
+deck.forEach(element => {
+  element.addEventListener('click', () => {
+    deckSelecionado = element.attributes.value.value;
+
+    if(page === 'palavras'){
+        carregaPaginaPalavras(nivelSelecionado, deckSelecionado);
+    }else{
+        carregaPaginaPhrasal(nivelSelecionado, deckSelecionado);
+    }    
+  })
+});
+
 
 function setaVariaveis(configuracoes){
     localStorage.setItem('configuracoes', JSON.stringify(configuracoes)); 
@@ -153,4 +167,58 @@ function carregaPagina(configuracoes){
   if(configuracoes[1] === "phrasal"){
     carregaPaginaPhrasal(configuracoes[0], 'phrasal');
 }
+}
+
+function mudaFundo(pagina){
+  if(pagina ==='palavra'){
+      const fundo = document.querySelector('.sobrepor');
+      const botao = document.querySelector('.conhecida__simples');
+      const opcoes = document.querySelector('[buttomPalavra]');
+
+      fundo.classList.toggle("aparece__fundo");
+      botao.classList.toggle("aparece__botao");
+      opcoes.classList.toggle("aparece__fundo");
+    }
+    if(pagina ==='phrasal'){
+      const fundo = document.querySelector('.sobrepor');
+      const botao = document.querySelector('.conhecida__simples__phrasal');
+      const opcoes = document.querySelector('[buttomPhrasal]');
+
+      fundo.classList.toggle("aparece__fundo");
+      botao.classList.toggle("aparece__botao");
+      opcoes.classList.toggle("aparece__fundo");
+    }
+}
+
+function modal(){
+  // Cria o elemento de modal
+  const modal = document.createElement('div');
+  modal.classList.add('modal');
+  modal.innerHTML = `
+    <div class="modal-content">
+      <h2>Atenção!</h2>
+      <p class="p__modal">Não há itens a serem revisados.</p>
+      <button class="modal-close-btn">Fechar</button>
+    </div>
+  `;
+
+  // Adiciona a modal ao corpo da página
+  document.body.appendChild(modal);
+
+  
+  // Adiciona um atraso de 100ms antes de adicionar as classes de animação
+  setTimeout(() => {
+    modal.classList.add('modal-fade-in');
+  }, 100);
+
+  // Seleciona o botão de fechar a modal
+  const closeButton = modal.querySelector('.modal-close-btn');
+
+  // Adiciona um ouvinte de eventos para fechar a modal quando o botão é clicado
+  closeButton.addEventListener('click', () => {
+    modal.classList.remove('modal-fade-in');
+    setTimeout(() => {
+      modal.remove();
+    }, 500);
+  });
 }
