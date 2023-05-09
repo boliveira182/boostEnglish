@@ -50,7 +50,8 @@ function preencheDadosNaTelaPhrasal(palavra, lista, tamanho){
         if(lista[palavra][0].length > 11){
             card.style.fontSize='0.6em';
         }
-
+       
+        setFontSize();
         mostraPalavra.innerHTML = lista[palavra][0];
 
         palavraGerada = lista[palavra][0];
@@ -61,6 +62,19 @@ function preencheDadosNaTelaPhrasal(palavra, lista, tamanho){
         modal();
     }
 }
+
+const myDiv = document.getElementById('myDiv');
+
+function setFontSize() {
+  const width = myDiv.offsetWidth;
+  const height = myDiv.offsetHeight;
+  console.log('width')
+  const fontSize = Math.min(width, height) * 0.4; // 10% da menor dimensão
+  myDiv.style.fontSize = fontSize + 'px';
+}
+
+window.addEventListener('resize', setFontSize);
+setFontSize();
 
 
 
