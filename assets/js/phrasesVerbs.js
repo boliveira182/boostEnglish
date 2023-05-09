@@ -2,7 +2,11 @@
 
 function carregaPaginaPhrasal(nivel, deckSelecionado){
     nivelSelecionado = nivel;
+    page = 'phrasal';
     deckSelect = deckSelecionado;
+
+    const telas = document.querySelectorAll('[significado]');
+    limpaTelas(telas);
 
     lista = JSON.parse(localStorage.getItem('dicionario__phrasal')) || [];
     const indices = JSON.parse(localStorage.getItem('indices__phrasal')) || [];
@@ -14,7 +18,7 @@ function carregaPaginaPhrasal(nivel, deckSelecionado){
     }
 
     if(deckSelect == 'revisar'){
-        lista = JSON.parse(localStorage.getItem('revisar')) || [];
+        lista = JSON.parse(localStorage.getItem('revisar__phrasal')) || [];
         tamanho = lista.length;
     }else{
         resultado = selecionaNivel(nivelSelecionado, indices, lista);
@@ -28,25 +32,36 @@ function carregaPaginaPhrasal(nivel, deckSelecionado){
 
 }
 
+function limpaTelas(telas){
+    telas.forEach(element => {
+        element.classList.add('zeraAltura');
+        element.classList.remove('aumentaAltura');
+    });
+}
+
+//função responsável por preencher os dados na tela 
 function preencheDadosNaTelaPhrasal(palavra, lista, tamanho){
     const mostraPalavra = document.querySelector('[phrasal]');
-    const aprendidas__phrasal = JSON.parse(localStorage.getItem('conhecidas__phrasal')) || [];
+    const mostraRestantes = document.querySelector('[restantes__phrasal]');
+    const aprendidas__phrasal = document.querySelector('[aprendidas__phrasal]');
+    const conhecidas__phrasal = JSON.parse(localStorage.getItem('conhecidas__phrasal')) || [];
 
-    if(lista[palavra][0].length > 11){
-        card.style.fontSize='0.6em';
+    if(lista != 0){
+        if(lista[palavra][0].length > 11){
+            card.style.fontSize='0.6em';
+        }
+
+        mostraPalavra.innerHTML = lista[palavra][0];
+
+        palavraGerada = lista[palavra][0];
+
+        mostraRestantes.innerHTML = lista.length;
+        aprendidas__phrasal.innerHTML = conhecidas__phrasal.length;
+    }else{
+        modal();
     }
-    preencheConteudo(mostraPalavra, lista[palavra][0]);
-    // preencheConteudo(mostraPalavra, lista[palavra][0]);
-    // const totalPalavras = document.querySelector('[restantes]');
-    // totalPalavras.innerHTML = tamanho;
-
-    // const totalPalavrasAprenidas = document.querySelector('[aprendidas]');
-    // totalPalavrasAprenidas.innerHTML = aprendidas.length;
 }
 
-function preencheConteudo(local, conteudo){
-    local.innerHTML = conteudo;
-}
 
 
 // Selecione o botão e a div e campo significado
@@ -54,34 +69,82 @@ var meuBotao = document.querySelectorAll('[botao__phrasal]');
 var significado = document.querySelectorAll('[significado]');
 
 
+//funçõa que escuta o click das opções disponíveis na tela 
 meuBotao.forEach(element => {
     // Adicione um evento de clique ao botão
-    element.addEventListener("click", function() {
+    element.addEventListener("click", function() {  
         const conteudo = element.attributes.value.value;
-        var valor = [];
-        var local =";"
-        if(conteudo === 'significado'){
-            valor = lista[palavra][1]
-            local = document.querySelector(`[${conteudo}]`);
-        }
-        if(conteudo === 'exemplo'){
-            valor = lista[palavra][2];
-            local = document.querySelector(`[${conteudo}]`);
-        }
-        if(conteudo === 'traducao'){
-            valor = lista[palavra][2];
-            local = document.querySelector(`[${conteudo}]`);
-        }
-        console.log(valor);
-        preencheConteudo(local, valor);
-
-        // Se a div estiver oculta, mostre-a com animação
-        if (local.style.height === "0px") {
-            local.style.height = "100px"; // Defina a altura desejada da div
-        }
-        // Se a div estiver visível, oculte-a com animação
-        else {
-            local.style.height = "0";
-        }
+        var result = verificaDiv(conteudo);
+        const local = result[0];
+        const valor = result[1]
+        local.innerHTML = valor;
+        mudaDiv(local);
     });
 });
+
+//funcção que verificaq qual div foi acionada 
+function verificaDiv(conteudo){
+    const cont = conteudo;
+    var local = '';
+    var valor ='';
+    if(cont === 'significado'){
+        valor = lista[palavra][1]
+        local = document.querySelector(`[${cont}]`);
+    }
+    if(cont === 'exemplo'){
+        valor = lista[palavra][2];
+        local = document.querySelector(`[${cont}]`);
+    }
+    if(cont === 'traducao'){
+        valor = lista[palavra][2];
+        local = document.querySelector(`[${cont}]`);
+    }
+    return [local, valor];
+}
+
+//função que exibe ou remove a div selecionada 
+function mudaDiv(local){
+    // Verifica se a classe existe no elemento HTML
+    if (local.classList.contains('zeraAltura')) {
+        // Se a classe existir, remove-a do elemento HTML
+        local.classList.remove('zeraAltura');
+        local.classList.add('aumentaAltura');
+    } else {
+        // Se a classe não existir, adiciona-a ao elemento HTML
+        local.classList.add('zeraAltura');
+        local.classList.remove('aumentaAltura');
+    }
+}
+
+const buttomsPhrasal = document.querySelectorAll('[buttom]');
+//função que escuta o click nos botões na tela e executa as funções correspondentes
+buttomsPhrasal.forEach((elements) => {
+    elements.addEventListener('click', (evento) => {
+        evento.preventDefault();
+
+        if(evento.target.value === 'phrasal+'){
+                mudaFundo('phrasal');
+        }
+
+        if(evento.target.attributes.value.value === 'conheco__phrasal'){ 
+            addicionaNaLista(palavraGerada, 'conhecidas__phrasal');
+            romeveDoDicionario(palavraGerada, nivelSelecionado, 'dicionario__phrasal');
+
+            mudaFundo('phrasal');
+            carregaPaginaPhrasal(nivelSelecionado, deckSelect);           
+        } 
+
+        if(evento.target.value === 'minerar__phrasal'){  
+            window.open(`https://www.linguee.com.br/portugues-ingles/search?source=auto&query=${lista[palavra][0]}`, '_blank');
+        }
+        if(evento.target.value === 'atualizar__phrasal'){ 
+            carregaPaginaPhrasal(nivelSelecionado, deckSelect);
+        }  
+
+        if(evento.target.attributes.value.value === 'revisar__phrasal'){ 
+            addicionaNaLista(palavraGerada, 'revisar__phrasal');
+            mudaFundo('phrasal');
+            carregaPaginaPhrasal(nivelSelecionado, deckSelect);
+        }     
+    })
+})
