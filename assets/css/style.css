@@ -365,13 +365,21 @@ hr {
     gap:10px;
     position: relative;
     bottom: 170px;
-    background-color: white;
-    color: #000;
+    color: white;
     margin-right: 100px;
     font-size: 1em;;
     padding: 0.3em;
     transition: 0.5s;
 
+  }
+
+  .menu__flutuante__botoes__links{
+    position: relative;
+    font-family: var(--font-family);
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 20px;
   }
 
   .conhecida__simples__sobrepor{
