@@ -1,0 +1,67 @@
+.titulo__phrasal{
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    font-size: 0.7em;
+}
+
+.phrasal_opttions{
+    display: flex;
+    width: 100%;
+}
+
+.conteudo__significado{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    text-align: center;
+    width: 100%;
+    height: 0px;
+    overflow: hidden;
+    transition: height 0.5s ease-in-out;
+    font-size: 0.5em;
+    background-color: hsla(197, 49%, 63%, 0.641);
+    color: #fff;
+}
+
+.conteudo__exemplo{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    text-align: center;
+    width: 100%;
+    height: 0px;
+    overflow: hidden;
+    transition: height 0.5s ease-in-out;
+    font-size: 0.5em;
+    background-color: hsla(197, 49%, 63%, 0.641);
+    color: #fff;
+}
+.conteudo__tradução{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    text-align: center;
+    width: 100%;
+    height: 0px;
+    overflow: hidden;
+    transition: height 0.5s ease-in-out;
+    font-size: 0.5em;
+    background-color: hsla(197, 49%, 63%, 0.641);
+    color: #fff;
+}
+
+.significado{
+    padding: 20px;
+}
+
+
+.zeraAltura{
+    height: 0px;
+}
+
+.aumentaAltura{
+    height: 100px;
+}
