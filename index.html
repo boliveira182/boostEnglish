@@ -11,6 +11,8 @@
     <link rel="stylesheet" href="./assets/css/reset.css">
     <link rel="stylesheet" href="./assets/css/style.css">
     <link rel="stylesheet" href="./assets/css/inicio.css">
+    <link rel="stylesheet" href="./assets/css/phrasal.css">
+    <link rel="stylesheet" href="./assets/css/modal.css">
 
 </head>
 <body>
@@ -92,7 +94,7 @@
 
             <button class="conhecida__simples" type="button" value='+' buttom> + </button>
                 
-            <div class="botoes">
+            <div class="botoes" buttomPalavra>
                 <ul class="menu__flutuante__botoes">
                     <li class="menu__flutuante__botoes__links" value="conheco" buttom> Conheço </li>
                     <li class="menu__flutuante__botoes__links" value="revisar" buttom>Revisar</li>
@@ -106,7 +108,7 @@
     <section class="phrasal" tela value="phrasal">
 
         <form action="" class="formulario">
-            <label class="titulo"> <u>Phrasal Verbs</u></label>
+            <label class="titulo__phrasal"> <u>Phrasal Verbs</u></label>
             <div class="card"  value="original" buttom phrasal> </div>
             <hr>
             <ul class="phrasal_opttions">
@@ -114,31 +116,37 @@
                 <li class="deck__select__item2" botao__phrasal value="exemplo">Exemplo</li>
                 <li class="deck__select__item3" botao__phrasal value="traducao">Tradução</li>
             </ul>
-            <div class="conteudo__significado" significado ><span class="significado" significado value="significado"></span></div>
-            <div class="conteudo__exemplo" exemplo ><span class="significado" significado value="exemplo"></span></div>
-            <div class="conteudo__tradução" traducao ><span class="significado" significado value="traducao"></span></div>
+            <div class="conteudo__significado zeraAltura" significado ><span class="significado"  value="significado"></span></div>
+            <div class="conteudo__exemplo zeraAltura" significado exemplo ><span class="significado"  value="exemplo"></span></div>
+            <div class="conteudo__tradução zeraAltura" significado traducao ><span class="significado"  value="traducao"></span></div>
+
+            <button class="favorite minerar" type="button" value='minerar__phrasal' buttom>Minerar </button>
+            <button class="favorite atualizar" type="button" value='atualizar__phrasal' buttom>Próxima </button>
+            
             <hr>
+
             <div class="info">
                 <div class="result">
                     <p class="info__text" >Palavras restantes:</p>
                     <hr>
-                    <strong><span class="box__info" total></span></strong>
+                    <strong><span class="box__info" restantes__phrasal></span></strong>
                 </div>
                 <div class="result">
                     <p class="info__text">Palavras aprendidas:</p>
                     <hr>
-                    <strong><span class="box__info" aprendidas></span></strong>
+                    <strong><span class="box__info" aprendidas__phrasal></span></strong>
                 </div>
             </div>
 
-            <button class="conhecida__simples" type="button" value='+' buttom> + </button>
+            <button class="conhecida__simples__phrasal" type="button" value='phrasal+' buttom> + </button>
                 
-            <div class="botoes">
+            <div class="botoes" buttomPhrasal>
                 <ul class="menu__flutuante__botoes">
-                    <li class="menu__flutuante__botoes__links" value="conheco" buttom> Conheço </li>
-                    <li class="menu__flutuante__botoes__links" value="revisar" buttom>Revisar</li>
+                    <li class="menu__flutuante__botoes__links" value="conheco__phrasal" buttom> Conheço </li>
+                    <li class="menu__flutuante__botoes__links" value="revisar__phrasal" buttom>Revisar</li>
                 </ul>
             </div> 
+            
         </form>      
     </section>
 
@@ -149,6 +157,8 @@
                 <li class="deck__select__item2" deck value='revisar'>Revisar</li>
             </ul>
     </section>
+
+
 
     <div class="sobrepor" value="sobrepor" buttom></div>
     
