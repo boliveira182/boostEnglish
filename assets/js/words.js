@@ -6,7 +6,7 @@
 const buttoms = document.querySelectorAll('[buttom]');
 const card = document.querySelector('.card');
 const card__traduzido = document.querySelector('.card__traduzido');
-const deck = document.querySelectorAll('[deck]');
+
 const container = document.querySelector('.container');
 const nivel = document.querySelectorAll('[nivel]');
 const deletar = document.querySelector('[deletar]');
@@ -16,6 +16,7 @@ const configurar = document.querySelector('[configurar]');
 
 function carregaPaginaPalavras(nivel, deckSelecionado){
     nivelSelecionado = nivel;
+    page = 'palavras';
     deckSelect = deckSelecionado;
 
     var lista = JSON.parse(localStorage.getItem('dicionario')) || [];
@@ -131,13 +132,7 @@ configurar.addEventListener('click', () => {
     mudaMenu();
 })
 
-//Essa função permite selecionar o Deck, se é o geral (contém todas as palavras) ou se é o revisar (contém as palavras marcadas para revisão)
-deck.forEach(element => {
-    element.addEventListener('click', () => {
-        deckSelecionado = element.attributes.value.value;
-        carregaPaginaPalavras(nivelSelecionado, deckSelecionado);
-    })
-});
+
 
 //Função que permite selecionar o nível de difículdade do programa
 nivel.forEach(element => {
@@ -154,19 +149,20 @@ buttoms.forEach((elements) => {
         evento.preventDefault();
 
         if(evento.target.value === '+'){
-            mudaFundo();
+            mudaFundo('palavra');
         }
 
         if(evento.target.attributes.value.value === 'conheco'){ 
             addicionaNaLista(palavraGerada, 'conhecidas');
-            romeveDoDicionario(palavraGerada, nivelSelecionado);
+            romeveDoDicionario(palavraGerada, nivelSelecionado, 'dicionario');
 
             
             card.style.display = "flex";
             card__traduzido.style.display = "none";
 
-            mudaFundo(); 
-            carregaPaginaPalavras(nivelSelecionado, deckSelect);           
+            mudaFundo('palavra');
+            carregaPaginaPalavras(nivelSelecionado, deckSelect);  
+                      
         } 
 
         if(evento.target.attributes.value.value=== 'original'){
@@ -187,12 +183,12 @@ buttoms.forEach((elements) => {
         }  
 
         if(evento.target.attributes.class.value === 'sobrepor aparece__fundo'){ 
-            mudaFundo();
+            mudaFundo(page);
         }  
 
         if(evento.target.attributes.value.value === 'revisar'){ 
             addicionaNaLista(palavraGerada, 'revisar');
-            mudaFundo();
+            mudaFundo('palavra');
             carregaPaginaPalavras(nivelSelecionado, 'revisar');
         }     
     })
@@ -205,21 +201,35 @@ function addicionaNaLista(palavra, lista){
     localStorage.setItem(`${lista}`, JSON.stringify(lista__atual));
 }
 
-function romeveDoDicionario(palavra, nivel){
-    var dicionario = JSON.parse(localStorage.getItem('dicionario'));
-    var conhecidas = JSON.parse(localStorage.getItem('conhecidas'));
-    var indices = JSON.parse(localStorage.getItem('indices'));
+function romeveDoDicionario(palavra, nivel, dicionario__atual){
+    if(dicionario__atual === 'dicionario'){
+        var dicionario = JSON.parse(localStorage.getItem('dicionario'));
+        var conhecidas = JSON.parse(localStorage.getItem('conhecidas'));
+        var indices = JSON.parse(localStorage.getItem('indices'));
+        indexAtual = 'indices';
+        const index = dicionario.indexOf(palavra);
+        dicionario.splice(index, 1);
+        localStorage.setItem('dicionario', JSON.stringify(dicionario));
+    }
 
-
-    const index = dicionario.indexOf(palavra);
-    dicionario.splice(index, 1);
-    localStorage.setItem('dicionario', JSON.stringify(dicionario));
-
+    if(dicionario__atual === 'dicionario__phrasal'){
+        var dicionario = JSON.parse(localStorage.getItem('dicionario__phrasal'));
+        var conhecidas = JSON.parse(localStorage.getItem('conhecidas__phrasal'));
+        var indices = JSON.parse(localStorage.getItem('indices__phrasal'));
+        indexAtual = 'indices__phrasal';
+        const index = dicionario.indexOf(palavra);
+        dicionario.splice(index, 1);
+        localStorage.setItem('dicionario__phrasal', JSON.stringify(dicionario));
+    }
+    
     const indexConhecida = dicionario.indexOf(palavra);
+    atualizaIndex(nivel, indexConhecida, conhecidas, dicionario__atual, indexAtual, indices);
+}
 
+function atualizaIndex(nivel, indexConhecida, conhecidas, dicionario__atual, indexAtual, indices){
     if(indexConhecida>=0){
         conhecidas.splice(indexConhecida, 1);
-        localStorage.setItem('conhecidas', JSON.stringify(conhecidas));
+        localStorage.setItem(`${dicionario__atual}`, JSON.stringify(conhecidas));
     }
 
     if(nivel === 'iniciante'){
@@ -231,7 +241,15 @@ function romeveDoDicionario(palavra, nivel){
     if(nivel === 'avancado'){
         indices = [indices[0], indices[1], indices[2]-1]
     }
-    localStorage.setItem('indices', JSON.stringify(indices));
+    localStorage.setItem(`${indexAtual}`, JSON.stringify(indices));
+
+    if(dicionario__atual === 'dicionario'){
+        carregaPaginaPalavras(nivel, dicionario__atual)
+    }else{
+        carregaPaginaPhrasal(nivel, dicionario__atual)
+    }
+
+
 }
 
 container.addEventListener('click', () => {
@@ -251,14 +269,6 @@ function mudaMenu(){
 
 
 
-function mudaFundo(){
-    const fundo = document.querySelector('.sobrepor');
-    const botao = document.querySelector('.conhecida__simples');
-    const opcoes = document.querySelector('.botoes');
 
-    fundo.classList.toggle("aparece__fundo");
-    botao.classList.toggle("aparece__botao");
-    opcoes.classList.toggle("aparece__fundo");
-}
 
  
