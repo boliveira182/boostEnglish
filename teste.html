@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Leitura de Arquivo de Texto</title>
+    <script src="meu-script.js"></script>
+</head>
+<body>
+    <input type="file" id="arquivo-input">
+    <button id="ler-btn">Ler Arquivo</button>
+
+    <script>
+        // Função para ler o arquivo de texto
+        function lerArquivoTxt(arquivo) {
+            var leitor = new FileReader();
+
+            leitor.onload = function(evento) {
+                var conteudo = evento.target.result;
+                var linhas = conteudo.split("\n").map(function(linha) {
+                    return linha.trim();
+                });
+
+                console.log(linhas); // Exemplo: exibir no console
+
+                // Faça o que precisar com o array de linhas
+            };
+
+            leitor.readAsText(arquivo);
+        }
+
+        // Função de manipulação do evento de clique do botão
+        function lerArquivo() {
+            var input = document.getElementById("arquivo-input");
+            var arquivo = input.files[0];
+
+            if (arquivo) {
+                lerArquivoTxt(arquivo);
+            }
+        }
+
+        // Adicionar evento de clique ao botão
+        var lerBtn = document.getElementById("ler-btn");
+        lerBtn.addEventListener("click", lerArquivo);
+    </script>
+</body>
+</html>
