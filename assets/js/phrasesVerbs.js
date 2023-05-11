@@ -42,6 +42,7 @@ function limpaTelas(telas){
 //função responsável por preencher os dados na tela 
 function preencheDadosNaTelaPhrasal(palavra, lista, tamanho){
     const mostraPalavra = document.querySelector('[phrasal]');
+    const mostraPalavraTraduzida = document.querySelector('[phrasal__trad]');
     const mostraRestantes = document.querySelector('[restantes__phrasal]');
     const aprendidas__phrasal = document.querySelector('[aprendidas__phrasal]');
     const conhecidas__phrasal = JSON.parse(localStorage.getItem('conhecidas__phrasal')) || [];
@@ -50,7 +51,7 @@ function preencheDadosNaTelaPhrasal(palavra, lista, tamanho){
         if(lista[palavra][0].length > 11){
             card.style.fontSize='0.6em';
         }
-       
+      
         setFontSize();
         mostraPalavra.innerHTML = lista[palavra][0];
 
@@ -58,6 +59,11 @@ function preencheDadosNaTelaPhrasal(palavra, lista, tamanho){
 
         mostraRestantes.innerHTML = lista.length;
         aprendidas__phrasal.innerHTML = conhecidas__phrasal.length;
+
+        const phrasalVerb = retornaSignificado()[palavra];
+        mostraPalavraTraduzida.innerHTML = phrasalVerb;
+   
+
     }else{
         modal();
     }
@@ -68,7 +74,6 @@ const myDiv = document.getElementById('myDiv');
 function setFontSize() {
   const width = myDiv.offsetWidth;
   const height = myDiv.offsetHeight;
-  console.log('width')
   const fontSize = Math.min(width, height) * 0.4; // 10% da menor dimensão
   myDiv.style.fontSize = fontSize + 'px';
 }
@@ -159,6 +164,48 @@ buttomsPhrasal.forEach((elements) => {
             addicionaNaLista(palavraGerada, 'revisar__phrasal');
             mudaFundo('phrasal');
             carregaPaginaPhrasal(nivelSelecionado, deckSelect);
-        }     
+        }  
+        if(evento.target.attributes.value.value === 'phrasal'){ 
+            mostrarDiv('phrasal__trad','phrasal' );
+        }   
+        if(evento.target.attributes.value.value === 'traduzido'){ 
+            someDiv('phrasal__trad','phrasal' );
+        } 
     })
 })
+
+function mostrarDiv(phrasal__trad, phrasal) {
+    var div = document.querySelector(`[${phrasal__trad}`);
+    var div2 = document.querySelector(`[${phrasal}`);
+    div.style.display = 'flex';
+    div2.style.display = 'none';
+
+  
+    div.style.height = '0px';
+    const altura = '100';
+  
+    div.style.height = '0px';
+    div.style.transition = 'height 0.5s ease-out';
+  
+    setTimeout(() => {
+      div.style.height = altura + 'px';
+    }, 0);
+}
+
+function someDiv(phrasal__trad, phrasal) {
+    var div2 = document.querySelector(`[${phrasal__trad}`);
+    var div = document.querySelector(`[${phrasal}`);
+    div.style.display = 'flex';
+    div2.style.display = 'none';
+
+  
+    div.style.height = '0px';
+    const altura = '100';
+  
+    div.style.height = '0px';
+    div.style.transition = 'height 0.5s ease-out';
+  
+    setTimeout(() => {
+      div.style.height = altura + 'px';
+    }, 0);
+}
