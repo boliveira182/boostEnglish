@@ -176,6 +176,25 @@ body {
     text-overflow: "…";
 }
 
+.card-trad{
+    display: none;
+    justify-content: center;
+    flex-wrap: wrap;
+    align-items: center;
+    height: 200px;
+    background-image: url("../img/card.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size:auto;
+    margin-top: 20px;
+    cursor: pointer;
+    color:white;
+    font-weight: bold;
+    font-size: 0.5em;
+    text-overflow: "…";
+
+}
+
 .card__traduzido{
     display: none;
     justify-content: center;
