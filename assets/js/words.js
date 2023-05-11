@@ -19,7 +19,7 @@ function carregaPaginaPalavras(nivel, deckSelecionado){
     page = 'palavras';
     deckSelect = deckSelecionado;
 
-    var lista = JSON.parse(localStorage.getItem('dicionario')) || [];
+    lista = JSON.parse(localStorage.getItem('dicionario')) || [];
     const indices = JSON.parse(localStorage.getItem('indices')) || [];
     var tamanho = 0;
 
