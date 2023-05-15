@@ -1,0 +1,124 @@
+.container {
+    position:fixed;
+    top: 200;
+    left: 20px;
+    z-index: 2;
+    cursor: pointer;
+}
+
+.bar1, .bar2, .bar3 {
+    width: 35px;
+    height: 5px;
+    background-color: #151210;
+    margin: 6px 0;
+    transition: 0.4s;
+  }
+
+  .bar__color{
+    background-color: white;
+  }
+
+.change .bar1 {
+    transform: translate(0, 11px) rotate(-45deg);
+}
+
+.change .bar2 {opacity: 0;}
+
+.change .bar3 {
+    transform: translate(0, -11px) rotate(45deg);
+}
+
+.menu{
+    position: fixed;
+    top: 0;
+    left: -50%; /* Inicialmente oculto */
+    width: 50%;
+    height: 100%;
+    background-color: #150a0a84;
+    transition: transform 0.3s ease-in-out; /* Adiciona a animação */
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content:center;
+    align-items:center;
+    color:white;
+}
+
+.menu-ativo {
+    transform: translateX(100%); /* Exibe o menu ao deslocar para a direita */
+} 
+.menu__lista{
+    display: flex;
+    padding: 10%;
+    justify-content: flex-start;
+    align-items: center;
+    font-size: 0.5em;
+    cursor: pointer;
+    font-weight: bold;
+    width: 100%;
+    height: 50px;
+    background-color: rgba(61, 61, 144, 0.178);
+}
+
+.menu__lista:hover{
+    background-color: rgba(61, 61, 144, 0.531);
+}
+
+.aparece__lista{
+    display: flex;
+
+}
+
+.nivel{
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    height: 50px;
+    width: 100%;
+    top: 50px;
+}
+
+.niveis{
+    color: white;
+    background-color: #000;
+    width: 100%;
+    font-size: 0.3em;
+    padding: 5px 0 5px 0;
+}
+
+.nivel__select{
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    width: 100%;
+    height: 50px;
+}
+
+.nivel__select__item{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.3em;
+    color: white;
+    width: 50%;
+    height: 50px;
+    background-color: #0A4D68;
+    cursor: pointer;
+}
+
+ .iniciante{
+    background-color: #2a864a;
+}
+
+.avancado{
+    background-color: #ac8a2e;
+}
+
+
+.aparece__nivel{
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
