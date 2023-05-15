@@ -6,8 +6,6 @@
 const buttoms = document.querySelectorAll('[buttom]');
 const card = document.querySelector('.card');
 const card__traduzido = document.querySelector('.card__traduzido');
-
-const container = document.querySelector('.container');
 const nivel = document.querySelectorAll('[nivel]');
 const deletar = document.querySelector('[deletar]');
 const criar = document.querySelector('[criar]');
@@ -149,7 +147,7 @@ buttoms.forEach((elements) => {
         evento.preventDefault();
 
         if(evento.target.value === '+'){
-            mudaFundo('palavra');
+            mudaFundo('palavras');
         }
 
         if(evento.target.attributes.value.value === 'conheco'){ 
@@ -160,7 +158,7 @@ buttoms.forEach((elements) => {
             card.style.display = "flex";
             card__traduzido.style.display = "none";
 
-            mudaFundo('palavra');
+            mudaFundo('palavras');
             carregaPaginaPalavras(nivelSelecionado, deckSelect);  
                       
         } 
@@ -183,7 +181,11 @@ buttoms.forEach((elements) => {
         }  
 
         if(evento.target.attributes.class.value === 'sobrepor aparece__fundo'){ 
-            mudaFundo(page);
+            if(page === 'menu'){
+                mudaMenu();
+            }else{
+                mudaFundo(page);
+            }
         }  
 
         if(evento.target.attributes.value.value === 'revisar'){ 
@@ -252,20 +254,7 @@ function atualizaIndex(nivel, indexConhecida, conhecidas, dicionario__atual, ind
 
 }
 
-container.addEventListener('click', () => {
-    mudaMenu();
-})
 
-function mudaMenu(){
-    const nivel__select = document.querySelector('.nivel');
-    container.classList.toggle("change");
-    nivel__select.classList.toggle("aparece__nivel");
-
-    const menu__lista = document.querySelectorAll('.menu__lista');
-    menu__lista.forEach(element => {
-        element.classList.toggle("aparece__lista");
-    });
-}
 
 
 
