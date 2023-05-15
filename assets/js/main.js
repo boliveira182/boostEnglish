@@ -162,15 +162,17 @@ function habilitaTela(telaPassada){
 
 function carregaPagina(configuracoes){
   if(configuracoes[1] === "palavras"){
-      carregaPaginaPalavras(configuracoes[0], 'geral');
+    page = 'palavras'
+    carregaPaginaPalavras(configuracoes[0], 'geral');
   }
   if(configuracoes[1] === "phrasal"){
+    page = 'phrasal'
     carregaPaginaPhrasal(configuracoes[0], 'phrasal');
 }
 }
 
 function mudaFundo(pagina){
-  if(pagina ==='palavra'){
+  if(pagina ==='palavras'){
       const fundo = document.querySelector('.sobrepor');
       const botao = document.querySelector('.conhecida__simples');
       const opcoes = document.querySelector('[buttomPalavra]');
@@ -188,6 +190,11 @@ function mudaFundo(pagina){
       botao.classList.toggle("aparece__botao");
       opcoes.classList.toggle("aparece__fundo");
     }
+    if(pagina ==='menu' ){
+      const fundo = document.querySelector('.sobrepor');
+      fundo.classList.toggle("aparece__fundo");
+    }
+
 }
 
 function modal(){
@@ -221,4 +228,22 @@ function modal(){
       modal.remove();
     }, 500);
   });
+}
+
+const container = document.querySelector('.container');
+container.addEventListener('click', () => {
+    mudaMenu();
+})
+
+function mudaMenu(){
+    const bars = document.querySelectorAll('.bar');
+    container.classList.toggle("change");
+
+    bars.forEach(element => {
+      element.classList.toggle("bar__color");
+    });
+    const menu = document.querySelector('.menu');
+    menu.classList.toggle('menu-ativo'); // Alterna a classe para ativar a animação
+    page ="menu";
+    mudaFundo('menu');
 }
